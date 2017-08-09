@@ -174,7 +174,29 @@
 </template>
 
 <script>
-  var fireballSize = 100;
+
+  var fireballSize = 22,
+
+      getFireballSpeed = function(left) {
+        return left ? 5 : 2;
+      },
+
+      wizardSpeed = 3,
+
+      wizardWidth = 70,
+
+      getWizardHeight = function(wizardWidth) {
+        return wizardWidth * 1.337;
+      },
+
+      getWizardX = function(width) {
+        return width / 2;
+      },
+
+      getWizardY = function(height) {
+        return height * 1 / 3;
+      };
+
 </script>
 <script src="./js/game.js"></script>
 
