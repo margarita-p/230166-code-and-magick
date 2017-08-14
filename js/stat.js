@@ -39,13 +39,13 @@ window.renderStatistics = function (ctx, names, times) {
 
   // Ищем самую высокую колонку
   var maxHeight = -1;
+  var max = function(time) {
+    time > maxHeight ? maxHeight = time : false;
+  }
 
   for (var i = 0; i < times.length; i++) {
     times[i] = Math.floor(times[i]);
-    var time = times[i];
-    if (time > maxHeight) {
-      maxHeight = time;
-    }
+    max(times[i]);
   }
 
   // Находим шаг пропорции колонок
@@ -57,13 +57,18 @@ window.renderStatistics = function (ctx, names, times) {
   var itemDistance = 50;
   var itemX = 155;
   var itemY = 90;
+  // цвета колонок
+  var RED_COLOR = 'rgb(255, 0, 0)';
+  var getRandomColor = function() {
+    return 'rgb(0, 0, ' + Math.floor(Math.random() * 255) + ')';
+  }
 
   // строим гистограмму
   for (i = 0; i < times.length; i++) {
     if (names[i] === 'Вы') {
-      ctx.fillStyle = 'rgb(255, 0, 0)';
+      ctx.fillStyle = RED_COLOR;
     } else {
-      ctx.fillStyle = 'rgb(0, 0, ' + Math.floor(Math.random() * 255) + ')';
+      ctx.fillStyle = getRandomColor();
     }
     ctx.fillRect(itemX + i * (itemWidth + itemDistance), itemY + (histogramHeight - times[i] * step), itemWidth, times[i] * step);
     ctx.fillStyle = 'rgb(0, 0, 0)';
