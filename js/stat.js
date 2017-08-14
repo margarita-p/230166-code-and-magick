@@ -7,7 +7,7 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillStroke = 'rgb(0, 0, 0)';
   ctx.beginPath();
   ctx.moveTo(100, 10);
-  ctx.lineWidth = 3;
+  ctx.lineWidth = 2;
   ctx.lineTo(310, 15);
   ctx.lineTo(520, 10);
   ctx.lineTo(505, 145);
@@ -50,7 +50,7 @@ window.renderStatistics = function (ctx, names, times) {
 
   // Находим шаг пропорции колонок
   var histogramHeight = 150;
-  var step = histogramHeight / (maxHeight - 0);
+  var step = histogramHeight / maxHeight;
 
   // Переменные для колонок
   var itemWidth = 40;
@@ -63,7 +63,7 @@ window.renderStatistics = function (ctx, names, times) {
     if (names[i] === 'Вы') {
       ctx.fillStyle = 'rgb(255, 0, 0)';
     } else {
-      ctx.fillStyle = 'rgb(0, 0, ' + Math.floor(255 - 42.5 * i) + ')';
+      ctx.fillStyle = 'rgb(0, 0, ' + Math.floor(Math.random() * 255) + ')';
     }
     ctx.fillRect(itemX + i * (itemWidth + itemDistance), itemY + (histogramHeight - times[i] * step), itemWidth, times[i] * step);
     ctx.fillStyle = 'rgb(0, 0, 0)';
