@@ -38,21 +38,20 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillText('Список результатов:', 310, 48);
 
   // Ищем самую высокую колонку
-  var maxHeight = -1;
-  var max = function (time) {
-    if (time > maxHeight) {
-      maxHeight = time;
+  var findMaxHeight = function (arr) {
+    var max = -1;
+    for (var i = 0; i < arr.length; i++) {
+      arr[i] = Math.floor(arr[i]);
+      if (arr[i] > max) {
+        max = arr[i];
+      }
     }
+    return max;
   };
-
-  for (var i = 0; i < times.length; i++) {
-    times[i] = Math.floor(times[i]);
-    max(times[i]);
-  }
 
   // Находим шаг пропорции колонок
   var histogramHeight = 150;
-  var step = histogramHeight / maxHeight;
+  var step = histogramHeight / findMaxHeight(times);
 
   // Переменные для колонок
   var itemWidth = 40;
@@ -67,7 +66,7 @@ window.renderStatistics = function (ctx, names, times) {
   };
 
   // строим гистограмму
-  for (i = 0; i < times.length; i++) {
+  for (var i = 0; i < times.length; i++) {
     if (names[i] === 'Вы') {
       ctx.fillStyle = RED_COLOR;
     } else {
