@@ -1,5 +1,26 @@
 'use strict';
 
+// Ищем максимум
+var findMaxHeight = function (arr) {
+  var max = -1;
+  for (var i = 0; i < arr.length; i++) {
+    arr[i] = Math.floor(arr[i]);
+    if (arr[i] > max) {
+      max = arr[i];
+    }
+  }
+  return max;
+};
+
+// цвета
+var RED_COLOR = 'rgb(255, 0, 0)';
+var getRandomColor = function () {
+  return 'rgb(0, 0, ' + Math.floor(Math.random() * 255) + ')';
+};
+
+
+
+// ++++++++++++++++++ГИСТОГРАММА+++++++++++++++++++
 window.renderStatistics = function (ctx, names, times) {
 
 // облако
@@ -37,18 +58,6 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.font = 'normal 16px PT Mono';
   ctx.fillText('Список результатов:', 310, 48);
 
-  // Ищем самую высокую колонку
-  var findMaxHeight = function (arr) {
-    var max = -1;
-    for (var i = 0; i < arr.length; i++) {
-      arr[i] = Math.floor(arr[i]);
-      if (arr[i] > max) {
-        max = arr[i];
-      }
-    }
-    return max;
-  };
-
   // Находим шаг пропорции колонок
   var histogramHeight = 150;
   var step = histogramHeight / findMaxHeight(times);
@@ -58,12 +67,6 @@ window.renderStatistics = function (ctx, names, times) {
   var itemDistance = 50;
   var itemX = 155;
   var itemY = 90;
-
-  // цвета колонок
-  var RED_COLOR = 'rgb(255, 0, 0)';
-  var getRandomColor = function () {
-    return 'rgb(0, 0, ' + Math.floor(Math.random() * 255) + ')';
-  };
 
   // строим гистограмму
   for (var i = 0; i < times.length; i++) {
