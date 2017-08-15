@@ -18,8 +18,6 @@ var getRandomColor = function () {
   return 'rgb(0, 0, ' + Math.floor(Math.random() * 255) + ')';
 };
 
-
-
 // ++++++++++++++++++ГИСТОГРАММА+++++++++++++++++++
 window.renderStatistics = function (ctx, names, times) {
 
