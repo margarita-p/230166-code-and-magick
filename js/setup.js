@@ -20,14 +20,14 @@ var escPressHandler = function (evt) {
   }
 };
 
-var open = function(modal) {
+var open = function (modal) {
   modal.classList.remove('hidden');
-  document.addEventListener('keydown', EscPressHandler);
+  document.addEventListener('keydown', escPressHandler);
 };
 
-var close = function(modal) {
+var close = function (modal) {
   modal.classList.add('hidden');
-  document.removeEventListener('keydown', EscPressHandler);
+  document.removeEventListener('keydown', escPressHandler);
 };
 
 userDialogOpen.addEventListener('click', function () {
@@ -54,7 +54,7 @@ userDialogClose.addEventListener('keydown', function (evt) {
 
 var userNameInput = userDialog.querySelector('.setup-user-name');
 
-userNameInput.addEventListener('invalid', function (evt) {
+userNameInput.addEventListener('invalid', function () {
   if (!userNameInput.validity.valid) {
     if (userNameInput.validity.tooShort) {
       userNameInput.setCustomValidity('От 2-х букв');
@@ -83,7 +83,7 @@ var friendsBlock = userDialog.querySelector('.setup-similar');
 
 var showDOMElement = function (elem) {
   elem.classList.remove('hidden');
-}
+};
 
 showDOMElement(friendsBlock);
 
@@ -104,7 +104,7 @@ var getWizards = function () {
       name: getRandomNoRepeat(WIZARD_FIRST_NAMES) + ' ' + getRandomNoRepeat(WIZARD_SECOND_NAMES),
       coatColor: getRandomNoRepeat(WIZARD_COAT_COLORS),
       eyesColor: getRandomNoRepeat(WIZARD_EYES_COLORS),
-    }
+    };
   }
   return wizards;
 };
@@ -135,15 +135,15 @@ var appendWizards = function (arr) {
 appendWizards(wizards);
 
 
-//меняем цвет при клике
+// меняем цвет при клике
 var setupWizard = userDialog.querySelector('.setup-wizard');
 var wizardCoat = setupWizard.querySelector('.wizard-coat');
 var wizardEyes = setupWizard.querySelector('.wizard-eyes');
 var fireballWrap = userDialog.querySelector('.setup-fireball-wrap');
 
-var inputWizardCoat = setupWizard.querySelector('input[name="coat-color"]');
-var inputWizardEyes = setupWizard.querySelector('input[name="eyes-color"]');
-var inputWizardFireball = setupWizard.querySelector('input[name="eyes-color"]');
+var inputWizardCoat = userDialog.querySelector('input[name="coat-color"]');
+var inputWizardEyes = userDialog.querySelector('input[name="eyes-color"]');
+var inputWizardFireball = userDialog.querySelector('input[name="eyes-color"]');
 
 var getRandomRepeat = function (arr) {
   var rand = Math.floor(Math.random() * arr.length);
