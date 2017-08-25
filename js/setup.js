@@ -16,7 +16,7 @@ var userDialogClose = userDialog.querySelector('.setup-close');
 
 var escPressHandler = function (evt) {
   if (evt.keyCode === ESC_KEYCODE) {
-    close();
+    close(userDialog);
   }
 };
 
