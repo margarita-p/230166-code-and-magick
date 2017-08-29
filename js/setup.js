@@ -19,8 +19,8 @@
     for (var i = 0; i < WIZARDS_LENGTH; i++) {
       wizards[i] = {
         name: window.global.getRandomNoRepeatElement(WIZARD_FIRST_NAMES) + ' ' + window.global.getRandomNoRepeatElement(WIZARD_SECOND_NAMES),
-        coatColor: window.global.getRandomNoRepeatElement(WIZARD_COAT_COLORS),
-        eyesColor: window.global.getRandomNoRepeatElement(WIZARD_EYES_COLORS),
+        coatColor: window.global.getRandomRepeatElement(WIZARD_COAT_COLORS),
+        eyesColor: window.global.getRandomRepeatElement(WIZARD_EYES_COLORS),
       };
     }
     return wizards;
