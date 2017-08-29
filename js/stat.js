@@ -1,27 +1,14 @@
 'use strict';
 
-// Ищем максимум
-var findMaxHeight = function (arr) {
-  var max = -1;
-  for (var i = 0; i < arr.length; i++) {
-    arr[i] = Math.floor(arr[i]);
-    if (arr[i] > max) {
-      max = arr[i];
-    }
-  }
-  return max;
-};
-
-// цвета
-var RED_COLOR = 'rgb(255, 0, 0)';
-var getRandomColor = function () {
-  return 'rgb(0, 0, ' + Math.floor(Math.random() * 255) + ')';
-};
-
-// ++++++++++++++++++ГИСТОГРАММА+++++++++++++++++++
 window.renderStatistics = function (ctx, names, times) {
+  var HISTOGRAM_HEIGHT = 150;
+  // Переменные для колонок
+  var ITEM_WIDTH = 40;
+  var ITEM_DISTANCE = 50;
+  var ITEM_X = 155;
+  var ITEM_Y = 90;
 
-// облако
+  // облако
   ctx.fillStyle = 'rgb(255, 255, 255)';
   ctx.fillStroke = 'rgb(0, 0, 0)';
   ctx.beginPath();
@@ -57,28 +44,21 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillText('Список результатов:', 310, 48);
 
   // Находим шаг пропорции колонок
-  var histogramHeight = 150;
-  var step = histogramHeight / findMaxHeight(times);
-
-  // Переменные для колонок
-  var itemWidth = 40;
-  var itemDistance = 50;
-  var itemX = 155;
-  var itemY = 90;
+  var step = HISTOGRAM_HEIGHT / window.global.findMaxHeight(times);
 
   // строим гистограмму
   for (var i = 0; i < times.length; i++) {
     if (names[i] === 'Вы') {
-      ctx.fillStyle = RED_COLOR;
+      ctx.fillStyle = window.global.RED_COLOR;
     } else {
-      ctx.fillStyle = getRandomColor();
+      ctx.fillStyle = window.global.getRandomBluerColor();
     }
-    ctx.fillRect(itemX + i * (itemWidth + itemDistance), itemY + (histogramHeight - times[i] * step), itemWidth, times[i] * step);
+    ctx.fillRect(ITEM_X + i * (ITEM_WIDTH + ITEM_DISTANCE), ITEM_Y + (HISTOGRAM_HEIGHT - times[i] * step), ITEM_WIDTH, times[i] * step);
     ctx.fillStyle = 'rgb(0, 0, 0)';
     ctx.font = 'normal 16px PT Mono';
-    ctx.fillText(times[i], itemX + i * (itemWidth + itemDistance) + itemWidth / 2, itemY + (histogramHeight - times[i] * step) - 18);
+    ctx.fillText(times[i], ITEM_X + i * (ITEM_WIDTH + ITEM_DISTANCE) + ITEM_WIDTH / 2, ITEM_Y + (HISTOGRAM_HEIGHT - times[i] * step) - 18);
     ctx.font = 'bold 16px PT Mono';
-    ctx.fillText(names[i], itemX + i * (itemWidth + itemDistance) + itemWidth / 2, 246);
+    ctx.fillText(names[i], ITEM_X + i * (ITEM_WIDTH + ITEM_DISTANCE) + ITEM_WIDTH / 2, 246);
   }
 
   // линия
