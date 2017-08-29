@@ -58,7 +58,7 @@
 
   var inputWizardCoat = userDialog.querySelector('input[name="coat-color"]');
   var inputWizardEyes = userDialog.querySelector('input[name="eyes-color"]');
-  var inputWizardFireball = userDialog.querySelector('input[name="eyes-color"]');
+  var inputWizardFireball = userDialog.querySelector('input[name="fireball-color"]');
 
   wizardCoat.addEventListener('click', function () {
     var color = window.global.getRandomRepeatElement(WIZARD_COAT_COLORS);
