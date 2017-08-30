@@ -130,4 +130,32 @@
     evt.preventDefault();
   });
 
+  // Обратно
+  artifactsElement.addEventListener('dragstart', function (evt) {
+    if (evt.target.tagName.toLowerCase() === 'img') {
+      draggedItem = evt.target;
+      evt.dataTransfer.setData('text/plain', evt.target.alt);
+    }
+  });
+
+  shopElement.addEventListener('dragover', function (evt) {
+    evt.preventDefault();
+  });
+
+  shopElement.addEventListener('drop', function (evt) {
+    evt.preventDefault();
+    evt.target.appendChild(draggedItem);
+    evt.target.style.backgroundColor = '';
+  });
+
+  shopElement.addEventListener('dragenter', function (evt) {
+    evt.target.style.backgroundColor = 'green';
+    evt.preventDefault();
+  });
+
+  shopElement.addEventListener('dragleave', function (evt) {
+    evt.preventDefault();
+    evt.target.style.backgroundColor = '';
+  });
+
 })();
