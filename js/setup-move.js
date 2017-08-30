@@ -150,6 +150,7 @@
 
   shopElement.addEventListener('dragenter', function (evt) {
     evt.target.style.backgroundColor = 'green';
+    shopElement.style.backgroundColor = '';
     evt.preventDefault();
   });
 
