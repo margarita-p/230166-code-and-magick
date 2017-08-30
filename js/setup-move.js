@@ -103,7 +103,6 @@
     if (evt.target.tagName.toLowerCase() === 'img') {
       draggedItem = evt.target;
       evt.dataTransfer.setData('text/plain', evt.target.alt);
-      evt.dataTransfer.effectAllowed = 'copy';
       artifactsElement.style.outline = '2px dashed red';
     }
   });
@@ -113,50 +112,20 @@
   });
 
   artifactsElement.addEventListener('drop', function (evt) {
-    evt.target.style.backgroundColor = '';
-    artifactsElement.style.outline = '';
-    evt.target.appendChild(draggedItem);
     evt.preventDefault();
+    artifactsElement.style.outline = '';
+    evt.target.style.backgroundColor = '';
+    evt.target.appendChild(draggedItem);
   });
 
   artifactsElement.addEventListener('dragenter', function (evt) {
     evt.target.style.backgroundColor = 'yellow';
-    evt.dataTransfer.dropEffect = 'copy';
     evt.preventDefault();
   });
 
   artifactsElement.addEventListener('dragleave', function (evt) {
     evt.target.style.backgroundColor = '';
     evt.preventDefault();
-  });
-
-  // Обратно
-  artifactsElement.addEventListener('dragstart', function (evt) {
-    if (evt.target.tagName.toLowerCase() === 'img') {
-      draggedItem = evt.target;
-      evt.dataTransfer.setData('text/plain', evt.target.alt);
-    }
-  });
-
-  shopElement.addEventListener('dragover', function (evt) {
-    evt.preventDefault();
-  });
-
-  shopElement.addEventListener('drop', function (evt) {
-    evt.preventDefault();
-    evt.target.appendChild(draggedItem);
-    evt.target.style.backgroundColor = '';
-  });
-
-  shopElement.addEventListener('dragenter', function (evt) {
-    evt.target.style.backgroundColor = 'green';
-    shopElement.style.backgroundColor = '';
-    evt.preventDefault();
-  });
-
-  shopElement.addEventListener('dragleave', function (evt) {
-    evt.preventDefault();
-    evt.target.style.backgroundColor = '';
   });
 
 })();
