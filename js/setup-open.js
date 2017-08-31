@@ -5,18 +5,18 @@
   var userDialogOpen = document.querySelector('.setup-open');
   var userDialogClose = userDialog.querySelector('.setup-close');
 
-  var escPressHandler = function (evt) {
+  var onEscPress = function (evt) {
     window.global.isEscEvent(evt, close);
   };
 
   var open = function () {
     window.global.showDOMElement(userDialog);
-    document.addEventListener('keydown', escPressHandler);
+    document.addEventListener('keydown', onEscPress);
   };
 
   var close = function () {
     window.global.hideDOMElement(userDialog);
-    document.removeEventListener('keydown', escPressHandler);
+    document.removeEventListener('keydown', onEscPress);
   };
 
   userDialogOpen.addEventListener('click', function () {
