@@ -51,7 +51,7 @@ window.renderStatistics = function (ctx, names, times) {
     if (names[i] === 'Вы') {
       ctx.fillStyle = window.global.RED_COLOR;
     } else {
-      ctx.fillStyle = window.global.getRandomBluerColor();
+      ctx.fillStyle = window.global.getRandomBlueColor();
     }
     ctx.fillRect(ITEM_X + i * (ITEM_WIDTH + ITEM_DISTANCE), ITEM_Y + (HISTOGRAM_HEIGHT - times[i] * step), ITEM_WIDTH, times[i] * step);
     ctx.fillStyle = 'rgb(0, 0, 0)';

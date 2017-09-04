@@ -54,27 +54,36 @@
   var setupWizard = userDialog.querySelector('.setup-wizard');
   var wizardCoat = setupWizard.querySelector('.wizard-coat');
   var wizardEyes = setupWizard.querySelector('.wizard-eyes');
-  var fireballWrap = userDialog.querySelector('.setup-fireball-wrap');
+  var wizardFireball = userDialog.querySelector('.setup-fireball-wrap');
 
   var inputWizardCoat = userDialog.querySelector('input[name="coat-color"]');
   var inputWizardEyes = userDialog.querySelector('input[name="eyes-color"]');
   var inputWizardFireball = userDialog.querySelector('input[name="fireball-color"]');
 
-  wizardCoat.addEventListener('click', function () {
-    var color = window.global.getRandomRepeatElement(WIZARD_COAT_COLORS);
-    wizardCoat.style.fill = color;
-    inputWizardCoat.value = color;
+  var onWizardCoatColorChange = function () {
+    window.colorizeElement.clickElement(wizardCoat, WIZARD_COAT_COLORS, inputWizardCoat, window.colorizeElement.fillElement);
+  };
+
+  var onWizardEyesColorChange = function () {
+    window.colorizeElement.clickElement(wizardEyes, WIZARD_EYES_COLORS, inputWizardEyes, window.colorizeElement.fillElement);
+  };
+
+  var onWizardFireballColorChange = function () {
+    window.colorizeElement.clickElement(wizardFireball, WIZARD_FIREBALL_COLORS, inputWizardFireball, window.colorizeElement.changeElementBackground);
+  };
+
+  wizardCoat.addEventListener('click', onWizardCoatColorChange);
+  wizardEyes.addEventListener('click', onWizardEyesColorChange);
+  wizardFireball.addEventListener('click', onWizardFireballColorChange);
+
+  wizardCoat.addEventListener('keydown', function (evt) {
+    window.global.isEnterEvent(evt, onWizardCoatColorChange);
+  });
+  wizardEyes.addEventListener('keydown', function (evt) {
+    window.global.isEnterEvent(evt, onWizardEyesColorChange);
+  });
+  wizardFireball.addEventListener('keydown', function (evt) {
+    window.global.isEnterEvent(evt, onWizardFireballColorChange);
   });
 
-  wizardEyes.addEventListener('click', function () {
-    var color = window.global.getRandomRepeatElement(WIZARD_EYES_COLORS);
-    wizardEyes.style.fill = color;
-    inputWizardEyes.value = color;
-  });
-
-  fireballWrap.addEventListener('click', function () {
-    var color = window.global.getRandomRepeatElement(WIZARD_FIREBALL_COLORS);
-    fireballWrap.style.backgroundColor = color;
-    inputWizardFireball.value = color;
-  });
 })();

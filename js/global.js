@@ -33,8 +33,8 @@
     },
 
     getRandomRepeatElement: function (arr) {
-      var rand = Math.floor(Math.random() * arr.length);
-      return arr[rand];
+      var rand = arr[Math.floor(Math.random() * arr.length)];
+      return rand;
     },
 
     findMaxHeight: function (arr) {
@@ -48,9 +48,9 @@
       return max;
     },
 
-    getRandomBluerColor: function () {
+    getRandomBlueColor: function () {
       return 'rgb(0, 0, ' + Math.floor(Math.random() * 255) + ')';
-    }
+    },
 
   };
 })();
