@@ -60,20 +60,30 @@
   var inputWizardEyes = userDialog.querySelector('input[name="eyes-color"]');
   var inputWizardFireball = userDialog.querySelector('input[name="fireball-color"]');
 
-  var onWizardCoatClick = function () {
+  var onWizardCoatColorChange = function () {
     window.colorizeElement.clickElement(wizardCoat, WIZARD_COAT_COLORS, inputWizardCoat, window.colorizeElement.fillElement);
   };
 
-  var onWizardEyesClick = function () {
+  var onWizardEyesColorChange = function () {
     window.colorizeElement.clickElement(wizardEyes, WIZARD_EYES_COLORS, inputWizardEyes, window.colorizeElement.fillElement);
   };
 
-  var onWizardFireballClick = function () {
+  var onWizardFireballColorChange = function () {
     window.colorizeElement.clickElement(wizardFireball, WIZARD_FIREBALL_COLORS, inputWizardFireball, window.colorizeElement.changeElementBackground);
   };
 
-  wizardCoat.addEventListener('click', onWizardCoatClick);
-  wizardEyes.addEventListener('click', onWizardEyesClick);
-  wizardFireball.addEventListener('click', onWizardFireballClick);
+  wizardCoat.addEventListener('click', onWizardCoatColorChange);
+  wizardEyes.addEventListener('click', onWizardEyesColorChange);
+  wizardFireball.addEventListener('click', onWizardFireballColorChange);
+
+  wizardCoat.addEventListener('keydown', function (evt) {
+    window.global.isEnterEvent(evt, onWizardCoatColorChange);
+  });
+  wizardEyes.addEventListener('keydown', function (evt) {
+    window.global.isEnterEvent(evt, onWizardEyesColorChange);
+  });
+  wizardFireball.addEventListener('keydown', function (evt) {
+    window.global.isEnterEvent(evt, onWizardFireballColorChange);
+  });
 
 })();
