@@ -60,14 +60,20 @@
   var inputWizardEyes = userDialog.querySelector('input[name="eyes-color"]');
   var inputWizardFireball = userDialog.querySelector('input[name="fireball-color"]');
 
-  var fillElement = function (element, color) {
-    element.style.fill = color;
+  var onWizardCoatClick = function () {
+    window.colorizeElement.clickElement(wizardCoat, WIZARD_COAT_COLORS, inputWizardCoat, window.colorizeElement.fillElement);
   };
 
-  var backgroundElement = function (element, color) {
-    element.style.backgroundColor = color;
+  var onWizardEyesClick = function () {
+    window.colorizeElement.clickElement(wizardEyes, WIZARD_EYES_COLORS, inputWizardEyes, window.colorizeElement.fillElement);
   };
 
-  window.colorizeElement(wizardCoat, WIZARD_COAT_COLORS, fillElement);
+  var onWizardFireballClick = function () {
+    window.colorizeElement.clickElement(wizardFireball, WIZARD_FIREBALL_COLORS, inputWizardFireball, window.colorizeElement.changeElementBackground);
+  };
+
+  wizardCoat.addEventListener('click', onWizardCoatClick);
+  wizardEyes.addEventListener('click', onWizardEyesClick);
+  wizardFireball.addEventListener('click', onWizardFireballClick);
 
 })();

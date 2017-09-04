@@ -1,11 +1,22 @@
 'use strict';
 
 (function () {
+  window.colorizeElement = {
 
-  window.colorizeElement = function (element, arr, changeColor) {
-    element.addEventListener('click', function () {
+    clickElement: function (element, arr, input, action) {
       var color = window.global.getRandomRepeatElement(arr);
-      changeColor(element, color);
-    });
-  }
+      input.value = color;
+      action(element, color);
+    },
+
+    fillElement: function (element, color) {
+      element.style.fill = color;
+    },
+
+    changeElementBackground: function (element, color) {
+      element.style.backgroundColor = color;
+    }
+
+  };
+
 })();

@@ -48,7 +48,7 @@
       return max;
     },
 
-    getRandomBluerColor: function () {
+    getRandomBlueColor: function () {
       return 'rgb(0, 0, ' + Math.floor(Math.random() * 255) + ')';
     },
 
