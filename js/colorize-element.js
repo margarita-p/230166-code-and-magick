@@ -2,6 +2,9 @@
 
 (function () {
 
+  // var userDialog = document.querySelector('.setup');
+  // userDialog.style.backgroundColor = 'red';
+
   window.colorizeElement = {
 
     paintElement: function (element, arr, input, action) {
