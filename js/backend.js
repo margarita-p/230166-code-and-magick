@@ -14,7 +14,7 @@
           onLoad(xhr.response);
           break;
         default:
-          onError(xhr.response);
+          onError('Неизвестный статус: ' + xhr.status + ' ' + xhr.statusText);
       }
     });
 
@@ -46,6 +46,18 @@
 
       xhr.open('POST', SERVER_URL);
       xhr.send(data);
+    },
+
+    isError: function (errorMassage) {
+      var node = document.createElement('div');
+      node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
+      node.style.position = 'absolute';
+      node.style.left = 0;
+      node.style.right = 0;
+      node.style.fontSize = '30px';
+
+      node.textContent = errorMassage;
+      document.body.insertAdjacentElement('afterbegin', node);
     }
 
   };

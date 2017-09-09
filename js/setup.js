@@ -24,16 +24,16 @@
 
   // ______
 
-  var onWizardsLoad = function (wizards) {
+  var onWizardsLoad = function (arr) {
     var fragment = document.createDocumentFragment();
     for (var i = 0; i < WIZARDS_LENGTH; i++) {
-      fragment.appendChild(renderWizard(wizards[i]));
+      fragment.appendChild(renderWizard(arr[i]));
     }
     similarListElement.appendChild(fragment);
     window.global.showDOMElement(friendsBlock);
   };
 
-  window.backend.load(onWizardsLoad, onWizardsError);
+  window.backend.load(onWizardsLoad, window.backend.isError);
 
   // Отправка формы
   var form = userDialog.querySelector('.setup-wizard-form');
@@ -43,24 +43,12 @@
   };
 
   var onWizardsSave = function (evt) {
-    window.backend.save(new FormData(form), uploadForm, onWizardsError);
+    window.backend.save(new FormData(form), uploadForm, window.backend.isError);
     evt.preventDefault();
   };
 
   form.addEventListener('submit', onWizardsSave);
 
-  // Сообщение об ошибке
-  var onWizardsError = function (errorMassage) {
-    var node = document.createElement('div');
-    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
-    node.style.position = 'absolute';
-    node.style.left = 0;
-    node.style.right = 0;
-    node.style.fontSize = '30px';
-
-    node.textContent = errorMassage;
-    document.body.insertAdjacentElement('afterbegin', node);
-  };
 
   // меняем цвет при клике
   var setupWizard = userDialog.querySelector('.setup-wizard');
