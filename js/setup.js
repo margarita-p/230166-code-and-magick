@@ -2,8 +2,6 @@
 
 (function () {
   var WIZARDS_LENGTH = 4;
-  var WIZARD_FIRST_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
-  var WIZARD_SECOND_NAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
 
   var WIZARD_COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
   var WIZARD_EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
@@ -11,44 +9,46 @@
 
   var userDialog = document.querySelector('.setup');
   var friendsBlock = userDialog.querySelector('.setup-similar');
-  window.global.showDOMElement(friendsBlock);
-
-  // Создание массива
-  var getWizards = function () {
-    wizards = [];
-    for (var i = 0; i < WIZARDS_LENGTH; i++) {
-      wizards[i] = {
-        name: window.global.getRandomNoRepeatElement(WIZARD_FIRST_NAMES) + ' ' + window.global.getRandomNoRepeatElement(WIZARD_SECOND_NAMES),
-        coatColor: window.global.getRandomRepeatElement(WIZARD_COAT_COLORS),
-        eyesColor: window.global.getRandomRepeatElement(WIZARD_EYES_COLORS),
-      };
-    }
-    return wizards;
-  };
-
-  var wizards = getWizards();
 
   // Клонирование
   var similarListElement = document.querySelector('.setup-similar-list');
   var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
 
-  var renderWizard = function (arr) {
+  var renderWizard = function (wizard) {
     var wizardElement = similarWizardTemplate.cloneNode(true);
-    wizardElement.querySelector('.setup-similar-label').textContent = arr.name;
-    wizardElement.querySelector('.wizard-coat').style.fill = arr.coatColor;
-    wizardElement.querySelector('.wizard-eyes').style.fill = arr.eyesColor;
+    wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
+    wizardElement.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
+    wizardElement.querySelector('.wizard-eyes').style.fill = wizard.colorEyes;
     return wizardElement;
   };
 
-  var appendWizards = function (arr) {
+  // ______
+
+  var onWizardsLoad = function (arr) {
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < arr.length; i++) {
+    for (var i = 0; i < WIZARDS_LENGTH; i++) {
       fragment.appendChild(renderWizard(arr[i]));
     }
     similarListElement.appendChild(fragment);
+    window.global.showDOMElement(friendsBlock);
   };
 
-  appendWizards(wizards);
+  window.backend.load(onWizardsLoad, window.backend.isError);
+
+  // Отправка формы
+  var form = userDialog.querySelector('.setup-wizard-form');
+
+  var uploadForm = function () {
+    userDialog.classList.add('hidden');
+  };
+
+  var onWizardsSave = function (evt) {
+    window.backend.save(new FormData(form), uploadForm, window.backend.isError);
+    evt.preventDefault();
+  };
+
+  form.addEventListener('submit', onWizardsSave);
+
 
   // меняем цвет при клике
   var setupWizard = userDialog.querySelector('.setup-wizard');
@@ -61,15 +61,15 @@
   var inputWizardFireball = userDialog.querySelector('input[name="fireball-color"]');
 
   var onWizardCoatColorChange = function () {
-    window.colorizeElement.clickElement(wizardCoat, WIZARD_COAT_COLORS, inputWizardCoat, window.colorizeElement.fillElement);
+    window.colorizeElement.paintElement(wizardCoat, WIZARD_COAT_COLORS, inputWizardCoat, window.colorizeElement.fillElement);
   };
 
   var onWizardEyesColorChange = function () {
-    window.colorizeElement.clickElement(wizardEyes, WIZARD_EYES_COLORS, inputWizardEyes, window.colorizeElement.fillElement);
+    window.colorizeElement.paintElement(wizardEyes, WIZARD_EYES_COLORS, inputWizardEyes, window.colorizeElement.fillElement);
   };
 
   var onWizardFireballColorChange = function () {
-    window.colorizeElement.clickElement(wizardFireball, WIZARD_FIREBALL_COLORS, inputWizardFireball, window.colorizeElement.changeElementBackground);
+    window.colorizeElement.paintElement(wizardFireball, WIZARD_FIREBALL_COLORS, inputWizardFireball, window.colorizeElement.changeElementBackground);
   };
 
   wizardCoat.addEventListener('click', onWizardCoatColorChange);
