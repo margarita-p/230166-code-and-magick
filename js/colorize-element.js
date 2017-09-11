@@ -2,13 +2,10 @@
 
 (function () {
 
-  // var userDialog = document.querySelector('.setup');
-  // userDialog.style.backgroundColor = 'red';
-
   window.colorizeElement = {
 
     paintElement: function (element, arr, input, action) {
-      var color = window.global.getRandomRepeatElement(arr);
+      var color = window.util.getRandomRepeatElement(arr);
       input.value = color;
       action(element, color);
     },
