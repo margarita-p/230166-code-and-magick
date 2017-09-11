@@ -17,7 +17,6 @@
   };
 
   window.render = {
-
     appendWizards: function (data) {
       var takeNumber = data.length > WIZARDS_AMOUNT ? WIZARDS_AMOUNT : data.length;
       similarListElement.innerHTML = '';
@@ -26,7 +25,6 @@
       }
       window.util.showDOMElement(friendsBlock);
     }
-
   };
 
 })();
