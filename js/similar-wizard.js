@@ -5,7 +5,6 @@
   var coatColor;
   var eyesColor;
   var wizards = [];
-  var lastTimeout;
 
   var getRank = function (wizard) {
     var rank = 0;
