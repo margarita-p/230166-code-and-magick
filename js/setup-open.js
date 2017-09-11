@@ -6,16 +6,16 @@
   var userDialogClose = userDialog.querySelector('.setup-close');
 
   var onEscPress = function (evt) {
-    window.global.isEscEvent(evt, close);
+    window.util.isEscEvent(evt, close);
   };
 
   var open = function () {
-    window.global.showDOMElement(userDialog);
+    window.util.showDOMElement(userDialog);
     document.addEventListener('keydown', onEscPress);
   };
 
   var close = function () {
-    window.global.hideDOMElement(userDialog);
+    window.util.hideDOMElement(userDialog);
     document.removeEventListener('keydown', onEscPress);
   };
 
@@ -24,7 +24,7 @@
   });
 
   userDialogOpen.addEventListener('keydown', function (evt) {
-    window.global.isEnterEvent(evt, open);
+    window.util.isEnterEvent(evt, open);
   });
 
   userDialogClose.addEventListener('click', function () {
@@ -32,6 +32,6 @@
   });
 
   userDialogClose.addEventListener('keydown', function (evt) {
-    window.global.isEnterEvent(evt, close);
+    window.util.isEnterEvent(evt, close);
   });
 })();

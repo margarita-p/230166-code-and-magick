@@ -56,7 +56,7 @@
 
   // при нажатии на ентер
   var onUserDialogOpenPress = function (evt) {
-    window.global.isEnterEvent(evt, isUserDialogOpenEvent);
+    window.util.isEnterEvent(evt, isUserDialogOpenEvent);
   };
 
   userDialogOpen.addEventListener('keydown', onUserDialogOpenPress);
@@ -81,14 +81,14 @@
 
   // при нажатии на клавишу ентер
   var onUserDialogCloseEnterPress = function (evt) {
-    window.global.isEnterEvent(evt, isUserDialogCloseEvent);
+    window.util.isEnterEvent(evt, isUserDialogCloseEvent);
   };
 
   userDialogClose.addEventListener('keydown', onUserDialogCloseEnterPress);
 
   // при нажатии на ескейп
   var onUserDialogCloseEscPress = function (evt) {
-    window.global.isEscEvent(evt, isUserDialogCloseEvent);
+    window.util.isEscEvent(evt, isUserDialogCloseEvent);
   };
 
   document.addEventListener('keydown', onUserDialogCloseEscPress);

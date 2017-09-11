@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+
   var userDialog = document.querySelector('.setup');
   var userNameInput = userDialog.querySelector('.setup-user-name');
 
@@ -27,4 +28,19 @@
       target.setCustomValidity('');
     }
   });
+
+  // Отправка формы
+  var form = document.querySelector('.setup-wizard-form');
+
+  var uploadForm = function () {
+    userDialog.classList.add('hidden');
+  };
+
+  var onWizardsSave = function (evt) {
+    window.backend.save(new FormData(form), uploadForm, window.backend.isError);
+    evt.preventDefault();
+  };
+
+  form.addEventListener('submit', onWizardsSave);
+
 })();

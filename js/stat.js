@@ -44,14 +44,14 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillText('Список результатов:', 310, 48);
 
   // Находим шаг пропорции колонок
-  var step = HISTOGRAM_HEIGHT / window.global.findMaxHeight(times);
+  var step = HISTOGRAM_HEIGHT / window.util.findMaxHeight(times);
 
   // строим гистограмму
   for (var i = 0; i < times.length; i++) {
     if (names[i] === 'Вы') {
-      ctx.fillStyle = window.global.RED_COLOR;
+      ctx.fillStyle = window.util.RED_COLOR;
     } else {
-      ctx.fillStyle = window.global.getRandomBlueColor();
+      ctx.fillStyle = window.util.getRandomBlueColor();
     }
     ctx.fillRect(ITEM_X + i * (ITEM_WIDTH + ITEM_DISTANCE), ITEM_Y + (HISTOGRAM_HEIGHT - times[i] * step), ITEM_WIDTH, times[i] * step);
     ctx.fillStyle = 'rgb(0, 0, 0)';
