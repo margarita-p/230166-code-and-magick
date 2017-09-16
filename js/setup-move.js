@@ -2,9 +2,9 @@
 
 (function () {
   var userDialog = document.querySelector('.setup');
-  var dialogHandle = userDialog.querySelector('.upload');
+  var dialogHandler = userDialog.querySelector('.upload');
 
-  var isDialogHandleEvent = function (evt) {
+  var isdialogHandlerEvent = function (evt) {
     evt.preventDefault();
 
     var startCoords = {
@@ -12,8 +12,11 @@
       y: evt.clientY
     };
 
+    var dragged = false;
+
     var onMouseMove = function (moveEvt) {
       moveEvt.preventDefault();
+      dragged = true;
 
       var shift = {
         x: startCoords.x - moveEvt.clientX,
@@ -34,6 +37,14 @@
 
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
+
+      if (dragged) {
+        var onClickPreventDefault = function (draggEvt) {
+          draggEvt.preventDefault();
+          dialogHandler.removeEventListener('click', onClickPreventDefault);
+        };
+        dialogHandler.addEventListener('click', onClickPreventDefault);
+      }
     };
 
     document.addEventListener('mousemove', onMouseMove);
@@ -44,7 +55,7 @@
   var userDialogOpen = document.querySelector('.setup-open');
 
   var isUserDialogOpenEvent = function () {
-    dialogHandle.addEventListener('mousedown', isDialogHandleEvent);
+    dialogHandler.addEventListener('mousedown', isdialogHandlerEvent);
   };
 
   // при клике
